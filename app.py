@@ -91,7 +91,7 @@ def interpret_status_code(status_code):
 
     return messages.get(status_code, "Unknown error code")
 def get_skills(oauth, user_id):
-    response = oauth.get("https://api.intra.42.fr/v2/cursus_users", params={"filter[user_id]":user_id})
+    response = oauth.get("https://api.intra.42.fr/v2/cursus_users", params={"filter[user_id]":user_id, "per_page": 100})
     print(f"Response status code skill: {response.status_code}")
     skills = response.json()[0]["skills"]
     for skill in skills:
@@ -99,7 +99,7 @@ def get_skills(oauth, user_id):
     return skills
 
 def get_projects(oauth, user_id):
-    response = oauth.get("https://api.intra.42.fr/v2/projects_users", params={"filter[user_id]":user_id})
+    response = oauth.get("https://api.intra.42.fr/v2/projects_users", params={"filter[user_id]":user_id, "per_page": 100})
     print(f"Response status code project: {response.status_code}")
     projects = []
     for project in response.json():
